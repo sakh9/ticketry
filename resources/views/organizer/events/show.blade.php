@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $event->title . ' - cikieto')
+@section('title', $event->title . ' - ticketry')
 
 @section('content')
 <div class="show-event-wrapper container pb-5 animate-fade-in">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'My Tickets - cikieto')
+@section('title', 'My Tickets - ticketry')
 
 @section('content')
 <div class="ticket-hub-portal container pb-5 animate-fade-in">

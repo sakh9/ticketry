@@ -149,7 +149,7 @@
             <!-- Ticket Header -->
             <div class="ticket-header-segment">
                 <small class="text-uppercase letter-spacing-wider font-monospace fw-bold fs-xxs d-block mb-1" style="opacity: 0.75;">
-                    cikieto.
+                    ticketry.
                 </small>
                 <h4 class="text-truncate px-2">
                     {{ $item->order->event->title }}

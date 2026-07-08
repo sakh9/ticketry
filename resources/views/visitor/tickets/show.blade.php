@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Ticket Details - cikieto')
+@section('title', 'Ticket Details - ticketry')
 
 @section('content')
 <div class="ticket-manifest-wrapper container pb-5 animate-fade-in">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Visitor Details - cikieto')
+@section('title', 'Visitor Details - ticketry')
 
 @section('content')
 <div class="visitor-form-portal container pb-5 animate-fade-in">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sign In - cikieto')
+@section('title', 'Sign In - ticketry')
 
 @section('content')
 <div class="row justify-content-center align-items-center login-wrapper">
@@ -13,7 +13,7 @@
                     <i class="bi bi-box-arrow-in-right fs-3 text-white"></i>
                 </div>
                 <h2 class="auth-title mb-1">Welcome Back</h2>
-                <p class="text-muted small">Sign in to access your cikieto dashboard.</p>
+                <p class="text-muted small">Sign in to access your ticketry dashboard.</p>
             </div>
 
             {{-- Handle Errors Validation Display --}}
@@ -40,7 +40,6 @@
 
                 <div class="mb-4">
                     <div id="role-default" class="role-status-box text-center p-2.5">
-                        <small class="text-muted"><i class="bi bi-search me-1"></i> Enter email to verify account type</small>
                     </div>
                     <div id="role-info" class="role-status-box text-center p-2" style="display: none;"></div>
                     <div id="role-not-found" class="role-status-box text-center p-2.5 bg-warning-light" style="display: none;">
@@ -54,11 +53,6 @@
                         <span class="input-group-text"><i class="bi bi-lock"></i></span>
                         <input type="password" name="password" class="form-control" required>
                     </div>
-                </div>
-                
-                <div class="mb-4 form-check d-flex align-items-center gap-1">
-                    <input type="checkbox" class="form-check-input mt-0" id="remember" name="remember">
-                    <label class="form-check-label small text-muted user-select-none" for="remember">Remember my session</label>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold mb-1">Sign In</button>

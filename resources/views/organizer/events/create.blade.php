@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Event - cikieto')
+@section('title', 'Create Event - ticketry')
 
 @push('styles')
 <style>
@@ -129,6 +129,11 @@
 
 @section('content')
 <div class="premium-form-wrapper container pb-5 animate-fade-in">
+
+    <a href="{{ route('organizer.events.index') }}" class="btn btn-link text-decoration-none text-secondary p-0 mb-3 d-inline-flex align-items-center gap-2 fw-semibold">
+        <i class="bi bi-chevron-left"></i>
+        <span>Back to Events</span>
+    </a>
 
     {{-- Executive Form Header --}}
     <div class="mb-4">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Browse Events - cikieto')
+@section('title', 'Browse Events - ticketry')
 
 @section('content')
 <h2>Browse Events</h2>

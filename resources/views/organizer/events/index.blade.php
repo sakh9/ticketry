@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'My Events - cikieto')
+@section('title', 'My Events - ticketry')
 
 @section('content')
 <div class="dashboard-container">

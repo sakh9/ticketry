@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Profile - cikieto')
+@section('title', 'Edit Profile - ticketry')
 
 @section('content')
 <h2>Edit Visitor Profile</h2>

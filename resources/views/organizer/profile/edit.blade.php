@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Profile - cikieto')
+@section('title', 'Edit Profile - ticketry')
 
 @section('content')
 <div class="edit-profile-wrapper container pb-5 animate-fade-in">

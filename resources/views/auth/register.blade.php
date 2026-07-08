@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sign Up - cikieto')
+@section('title', 'Sign Up - ticketry')
 
 @section('content')
 <div class="row justify-content-center align-items-center register-wrapper">

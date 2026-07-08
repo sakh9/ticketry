@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Review Order - cikieto')
+@section('title', 'Review Order - ticketry')
 
 @section('content')
 <div class="checkout-portal-wrapper container pb-5 animate-fade-in">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Payment - cikieto')
+@section('title', 'Payment - ticketry')
 
 @section('content')
 <div class="payment-portal-wrapper container pb-5 animate-fade-in">

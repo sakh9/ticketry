@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome to cikieto')
+@section('title', 'Welcome to ticketry')
 
 @section('content')
 <div class="welcome-hero-container d-flex align-items-center justify-content-center animate-fade-in">
@@ -14,7 +14,7 @@
             </div>
             
             <h1 class="hero-title mb-3">
-                <span class="text-brand-gradient">cikieto.</span>
+                <span class="text-brand-gradient">ticketry.</span>
             </h1>
             
             <p class="hero-subtitle mb-4">

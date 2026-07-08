@@ -11,7 +11,6 @@ use App\Http\Controllers\Visitor\ProfileController as VisitorProfileController;
 use App\Http\Controllers\Visitor\CartController;
 use App\Http\Controllers\Visitor\CheckoutController;
 use App\Http\Controllers\Visitor\TicketController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // Home
 Route::get('/', function () {
@@ -27,23 +26,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// Forgot Password Routes
-Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
-    ->middleware('guest')
-    ->name('password.request');
-
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
-    ->middleware('guest')
-    ->name('password.email');
-
-Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])
-    ->middleware('guest')
-    ->name('password.reset');
-
-Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])
-    ->middleware('guest')
-    ->name('password.update');
 
 // Organizer Routes
 Route::prefix('organizer')->name('organizer.')->middleware(['organizer', 'check.banned'])->group(function () {

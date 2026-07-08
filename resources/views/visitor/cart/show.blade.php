@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Cart - cikieto')
+@section('title', 'Cart - ticketry')
 
 @section('content')
 <div class="cart-portal-wrapper container pb-5 animate-fade-in">
