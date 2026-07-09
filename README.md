@@ -47,7 +47,7 @@ A Laravel-based event ticketing platform connecting organizers and visitors.
 ## Installation
 
 1. Clone the repository
-```bash
+bash
 git clone https://github.com/sakh9/ticketry.git
 cd ticketry
 
