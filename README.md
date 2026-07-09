@@ -1,3 +1,61 @@
+# ticketry.
+
+A Laravel-based event ticketing platform connecting organizers and visitors.
+
+---
+
+## Features
+
+### Organizer
+- Create event proposals with multiple ticket types
+- Upload venue permits and event plans
+- Real-time location availability checking
+- Sales dashboard with revenue breakdown
+- Monthly income reports
+- Banking information management
+- Profile with logo, social media, and category
+
+### Visitor
+- Browse events with search and filters (category, city, online/offline)
+- Purchase tickets (max 4 per order)
+- Free tickets skip payment, paid tickets via virtual account
+- Download PDF tickets with QR codes
+- Order history with status tracking
+
+### Admin
+- Review proposals with checklist system
+- Approve/reject with reviewer tracking
+- Monthly reports with PDF download
+- User management with ban system
+- Location management
+- Admin management (create/delete other admins)
+- RBAC via Spatie Laravel Permission
+
+---
+
+## Tech Stack
+
+- **Backend:** Laravel 13, PHP 8.3
+- **Database:** PostgreSQL
+- **Frontend:** Bootstrap 5, JavaScript
+- **PDF:** barryvdh/laravel-dompdf
+- **RBAC:** spatie/laravel-permission
+- **QR Code:** simplesoftwareio/simple-qrcode
+
+---
+
+## Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/sakh9/ticketry.git
+cd ticketry
+
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
