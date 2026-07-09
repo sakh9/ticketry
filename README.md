@@ -1,6 +1,10 @@
+ 
+File: README.md
+
+```markdown
 # ticketry.
 
-A CRUD Laravel-based event ticketing platform project connecting organizers and visitors.
+A Laravel-based event ticketing platform connecting organizers and visitors.
 
 ---
 
@@ -47,15 +51,112 @@ A CRUD Laravel-based event ticketing platform project connecting organizers and 
 ## Installation
 
 1. Clone the repository
-``` bash
+```bash
 git clone https://github.com/sakh9/ticketry.git
+cd ticketry
 ```
+
 2. Install dependencies
-```
+
+```bash
 composer install
 ```
 
+3. Copy environment file
 
+```bash
+cp .env.example .env
+```
+
+4. Configure your database in .env
+
+```
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=ticketryDB
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+```
+
+5. Generate application key
+
+```bash
+php artisan key:generate
+```
+
+6. Run migrations and seeders
+
+```bash
+php artisan migrate --seed
+```
+
+7. Assign roles to users
+
+```bash
+php artisan cikieto:assign-roles
+```
+
+8. Start the server
+
+```bash
+php artisan serve
+```
+
+9. Access the application at http://127.0.0.1:8000
+
+---
+
+Default Credentials
+
+Role Email Password
+Admin admin@ticketry.com password123
+Organizer Register at /register -
+Visitor Register at /register -
+
+---
+
+Scheduled Tasks
+
+Run the scheduler for auto-closing past events:
+
+```bash
+php artisan schedule:run
+```
+
+Or add to crontab:
+
+```bash
+* * * * * cd /path-to-project && php artisan schedule:run >> /dev/null 2>&1
+```
+
+---
+
+Commands
+
+Command Description
+php artisan events:close-past Close events past end time
+php artisan tickets:release-expired Release expired reservations
+php artisan cikieto:assign-roles Assign roles to all users
+php artisan cikieto:create-admin Create new admin via CLI
+
+---
+
+License
+
+This project is for educational purposes.
+
+```
+
+---
+
+Then push to GitHub:
+
+```bash
+git add README.md
+git commit -m "Add README"
+git push
+```
 
 
 
