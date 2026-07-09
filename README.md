@@ -1,6 +1,6 @@
 # ticketry.
 
-A Laravel-based event ticketing platform connecting organizers and visitors.
+A CRUD Laravel-based event ticketing platform project connecting organizers and visitors.
 
 ---
 
@@ -47,10 +47,13 @@ A Laravel-based event ticketing platform connecting organizers and visitors.
 ## Installation
 
 1. Clone the repository
-bash
+``` bash
 git clone https://github.com/sakh9/ticketry.git
-cd ticketry
-
+```
+2. Install dependencies
+```
+composer install
+```
 
 
 
