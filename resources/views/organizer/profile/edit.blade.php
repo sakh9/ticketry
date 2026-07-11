@@ -90,10 +90,27 @@
                                 <label class="form-label custom-form-label">Email</label>
                                 <input type="email" name="email_organizer" class="form-control premium-input-field" value="{{ old('email_organizer', $organizer->email_organizer) }}" readonly disabled>
                             </div>
+
+                            {{-- Organizer Description Field --}}
                             <div class="col-12">
-                                <label class="form-label custom-form-label">Organizer Description</label>
-                                <textarea name="deskripsi_organizer" class="form-control premium-input-field" rows="3" placeholder="Elaborate campaign missions, target audiences or background...精度">{{ old('deskripsi_organizer', $organizer->deskripsi_organizer) }}</textarea>
+                                <label class="form-label custom-form-label d-flex align-items-center justify-content-between">
+                                    <span>Organizer Description</span>
+                                    <span class="badge bg-subtle text-secondary border border-1 fs-xxs fw-semibold">
+                                        <i class="bi bi-markdown me-1"></i> Markdown Supported
+                                    </span>
+                                </label>
+
+                                <textarea name="deskripsi_organizer" 
+                                        class="form-control premium-input-field" 
+                                        rows="5" 
+                                        placeholder="Tell visitors about your organization...&#10;&#10;Supported formatting:&#10;**bold**, *italic*&#10;## Heading&#10;- Bullet point list">{{ old('deskripsi_organizer', $organizer->deskripsi_organizer) }}</textarea>
+
+                                <div class="form-text custom-tiny-hint mt-1.5">
+                                    <i class="bi bi-info-circle me-0.5"></i> Provide a clear, detailed bio that will appear on your public organizer profile.
+                                </div>
                             </div>
+                            
+                            {{-- Organizer Category & Social Media Links --}}
                             <div class="mb-3">
                                 <label class="form-label">Organizer Category <span class="text-danger">*</span></label>
                                 <select name="category_id" class="form-control" required>

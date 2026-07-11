@@ -40,6 +40,7 @@
 
                 <div class="mb-4">
                     <div id="role-default" class="role-status-box text-center p-2.5">
+                        <small class="text-muted fw-semibold"><i class="bi bi-info-circle me-1"></i> detect your account role</small>
                     </div>
                     <div id="role-info" class="role-status-box text-center p-2" style="display: none;"></div>
                     <div id="role-not-found" class="role-status-box text-center p-2.5 bg-warning-light" style="display: none;">

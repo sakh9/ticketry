@@ -56,9 +56,11 @@
                             </span>
                             <select name="payment_method" class="form-select premium-select-field" required>
                                 <option value="">-- Choose Payment Method --</option>
-                                <option value="bca_va">🏦 BCA Virtual Account</option>
-                                <option value="dana">💎 Dana Digital Wallet</option>
-                                <option value="ovo">🔮 OVO Financial App</option>
+                                <option value="bca_va">BCA Virtual Account</option>
+                                <option value="mandiri_va">Mandiri Virtual Account</option>
+                                <option value="bni_va">BNI Virtual Account</option>
+                                <option value="dana">Dana Digital Wallet</option>
+                                <option value="ovo">OVO Financial App</option>
                             </select>
                         </div>
                     </div>

@@ -510,7 +510,7 @@
         <div class="container">
             @if (Route::is('login') || Route::is('register'))
                 <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="bi bi-ticket-perforated-fill me-2"></i>
+                    <i class="bi bi-ticket-perforated-fill me-2"></i>
                     ticketry.
                 </a>
             @else
@@ -622,6 +622,11 @@
                                     <li>
                                         <a class="dropdown-item" href="{{ route('visitor.events.index') }}">
                                             <i class="bi bi-search"></i>Browse Events
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('visitor.organizers.index') }}">
+                                            <i class="bi bi-people"></i>Organizers
                                         </a>
                                     </li>
                                     <li>

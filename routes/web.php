@@ -11,6 +11,7 @@ use App\Http\Controllers\Visitor\ProfileController as VisitorProfileController;
 use App\Http\Controllers\Visitor\CartController;
 use App\Http\Controllers\Visitor\CheckoutController;
 use App\Http\Controllers\Visitor\TicketController;
+use App\Http\Controllers\Visitor\OrganizerController;
 
 // Home
 Route::get('/', function () {
@@ -73,5 +74,9 @@ Route::prefix('visitor')->name('visitor.')->group(function () {
         Route::get('/ticket/{order}/qr/{itemId}', [TicketController::class, 'qr'])->name('ticket.qr');
         Route::get('/ticket/{order}/continue-payment', [TicketController::class, 'continuePayment'])->name('ticket.continue-payment');
         Route::post('/ticket/{order}/cancel', [TicketController::class, 'cancel'])->name('ticket.cancel');
+
+        // Visitor organizer browsing
+        Route::get('/organizers', [OrganizerController::class, 'index'])->name('organizers.index');
+        Route::get('/organizers/{organizer}', [OrganizerController::class, 'show'])->name('organizers.show');
     });
 });
