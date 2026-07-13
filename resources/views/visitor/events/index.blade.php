@@ -64,6 +64,15 @@
         @foreach($events as $event)
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
+                
+                    @if($event->banner)
+                        <img src="{{ asset('storage/' . $event->banner) }}" class="card-img-top" alt="{{ $event->title }}" style="height: 180px; object-fit: cover;">
+                    @else
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                            <i class="bi bi-calendar-event text-muted" style="font-size: 3rem;"></i>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         @if($event->category)
                             <span class="badge bg-light text-dark mb-2">{{ $event->category->name }}</span>

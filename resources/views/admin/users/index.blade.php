@@ -158,32 +158,32 @@
         </div>
 
         <!-- Filters -->
-        <div class="card mb-4">
-            <div class="card-body">
+        <div class="card mb-4 border-0 shadow-sm" style="border-radius: var(--radius);">
+            <div class="card-body p-4">
                 <form method="GET" action="{{ route('admin.users.index') }}">
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Role</label>
-                            <select name="role" class="form-control" onchange="this.form.submit()">
-                                <option value="all" {{ $roleFilter == 'all' ? 'selected' : '' }}>All Users</option>
-                                <option value="organizer" {{ $roleFilter == 'organizer' ? 'selected' : '' }}>Organizers Only</option>
-                                <option value="visitor" {{ $roleFilter == 'visitor' ? 'selected' : '' }}>Visitors Only</option>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-secondary small">Role</label>
+                            <select name="role" class="form-select focus-none" onchange="this.form.submit()">
+                                <option value="all" {{ ($roleFilter ?? '') == 'all' ? 'selected' : '' }}>All Users</option>
+                                <option value="organizer" {{ ($roleFilter ?? '') == 'organizer' ? 'selected' : '' }}>Organizers Only</option>
+                                <option value="visitor" {{ ($roleFilter ?? '') == 'visitor' ? 'selected' : '' }}>Visitors Only</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mb-3">
-                            <label class="form-label">Status</label>
-                            <select name="status" class="form-control" onchange="this.form.submit()">
-                                <option value="all" {{ $statusFilter == 'all' ? 'selected' : '' }}>All Status</option>
-                                <option value="active" {{ $statusFilter == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="banned" {{ $statusFilter == 'banned' ? 'selected' : '' }}>Banned</option>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-secondary small">Status</label>
+                            <select name="status" class="form-select focus-none" onchange="this.form.submit()">
+                                <option value="all" {{ ($statusFilter ?? '') == 'all' ? 'selected' : '' }}>All Status</option>
+                                <option value="active" {{ ($statusFilter ?? '') == 'active' ? 'selected' : '' }}>Active</option>
+                                <option value="banned" {{ ($statusFilter ?? '') == 'banned' ? 'selected' : '' }}>Banned</option>
                             </select>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Search</label>
-                            <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="Name, email, phone...">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-secondary small">Search</label>
+                            <input type="text" name="search" class="form-control focus-none" value="{{ $search ?? '' }}" placeholder="Name, email, phone...">
                         </div>
-                        <div class="col-md-2 mb-3 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary w-100">Filter</button>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100 fw-semibold">Filter</button>
                         </div>
                     </div>
                 </form>
@@ -199,19 +199,36 @@
             
             <div class="table-responsive">
                 @if(count($users) > 0)
-                    <table class="table table-premium mb-0">
+                    <table class="table table-premium mb-0 align-middle">
                         <thead>
                             <tr>
-                                <th>Identity Name / Display</th>
-                                <th>Email Address</th>
-                                <th>Phone Vector</th>
-                                <th>Registration Date</th>
-                                <th class="text-end" style="width: 140px;">Account Actions</th>
+                                <th style="width: 50px;"></th>  <!-- Avatar column -->
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Registered</th>
+                                <th class="text-end" style="width: 160px;">Account Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($users as $user)
-                                <tr>
+                                <tr class="{{ $user->is_banned ? 'table-danger' : '' }}">
+                                    <!-- Avatar -->
+                                    <td class="text-center">
+                                        @if($user->user_role === 'organizer' && $user->logo_organizer)
+                                            <img src="{{ asset('storage/' . $user->logo_organizer) }}" alt="Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                        @elseif($user->user_role === 'visitor' && $user->foto_visitor)
+                                            <img src="{{ asset('storage/' . $user->foto_visitor) }}" alt="Photo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                        @else
+                                            <div style="width: 40px; height: 40px; background: #e9ecef; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: #999;">
+                                                {{ strtoupper(substr($user->display_name ?? 'U', 0, 1)) }}
+                                            </div>
+                                        @endif
+                                    </td>
+
+                                    <!-- Name -->
                                     <td>
                                         <div class="d-flex flex-column">
                                             <span class="fw-bold text-dark">{{ $user->display_name }}</span>
@@ -222,43 +239,68 @@
                                             @endif
                                         </div>
                                     </td>
+
+                                    <!-- Email -->
                                     <td>
                                         <span class="font-monospace text-secondary fs-xxs fw-semibold bg-light px-2 py-1 rounded border">
                                             {{ $user->display_email }}
                                         </span>
                                     </td>
+
+                                    <!-- Phone -->
                                     <td>
                                         <span class="text-muted small font-monospace">
                                             {{ $user->display_phone ?? '-' }}
                                         </span>
                                     </td>
+
+                                    <!-- Role -->
+                                    <td>
+                                        @if($user->user_role === 'organizer')
+                                            <span class="badge badge-state badge-state-organizer">ORGANIZER</span>
+                                        @else
+                                            <span class="badge badge-state badge-state-visitor">VISITOR</span>
+                                        @endif
+                                    </td>
+
+                                    <!-- Status -->
+                                    <td>
+                                        @if($user->is_banned)
+                                            <span class="badge badge-state badge-state-banned">Banned</span>
+                                        @else
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1 fs-xxs fw-bold">Active</span>
+                                        @endif
+                                    </td>
+
+                                    <!-- Registered -->
                                     <td>
                                         <div class="d-flex align-items-center gap-1 text-muted small">
                                             <i class="bi bi-calendar3 fs-xxs"></i>
-                                            <span class="font-monospace">{{ $user->created_at->format('d M Y') }}</span>
+                                            <span class="font-monospace">{{ $user->created_at ? $user->created_at->format('d M Y') : '-' }}</span>
                                         </div>
                                     </td>
-                                    <td class="text-end">
-                                        <div class="d-flex justify-content-end align-items-center gap-3">
 
-                                            <a href="{{ route('admin.users.show', ['role' => $user->user_role, 'id' => $user->user_id]) }}" class="btn btn-info btn-sm">Detail</a>
+                                    <!-- Actions -->
+                                    <td class="text-end">
+                                        <div class="d-flex justify-content-end align-items-center gap-2">
+                                            <a href="{{ route('admin.users.show', ['role' => $user->user_role, 'id' => $user->user_id]) }}" class="btn btn-info btn-sm text-white fw-semibold">Detail</a>
 
                                             @if($user->is_banned)
                                                 <form method="POST" action="{{ route('admin.users.unban') }}" class="d-inline">
                                                     @csrf
                                                     <input type="hidden" name="role" value="{{ $user->user_role }}">
                                                     <input type="hidden" name="id" value="{{ $user->user_id }}">
-                                                    <button type="submit" class="btn btn-success btn-sm">Unban</button>
+                                                    <button type="submit" class="btn btn-success btn-sm fw-semibold">Unban</button>
                                                 </form>
                                             @else
-                                                <button type="button" class="btn btn-warning btn-sm" onclick="showBanForm('{{ $user->user_role }}', {{ $user->user_id }}, '{{ $user->display_name }}')">Ban</button>
+                                                <button type="button" class="btn btn-warning btn-sm text-dark fw-semibold" onclick="showBanForm('{{ $user->user_role }}', {{ $user->user_id }}, '{{ addslashes($user->display_name) }}')">Ban</button>
                                             @endif
 
                                             <form method="POST" action="{{ route('admin.users.destroy', $user->user_id) }}" onsubmit="return confirm('Are you sure you want to completely remove this user from the architecture database? This action cannot be undone.')">
                                                 @csrf 
                                                 @method('DELETE')
                                                 <input type="hidden" name="role" value="{{ $user->user_role }}">
-                                                <button type="submit" class="btn btn-link link-danger p-0 border-0 shadow-none text-decoration-none fw-bold small d-inline-flex align-items-center gap-1">
+                                                <button type="submit" class="btn btn-link link-danger p-0 border-0 shadow-none text-decoration-none fw-bold small d-inline-flex align-items-center gap-1 ms-1">
                                                     <i class="bi bi-trash3"></i>
                                                     <span>Delete</span>
                                                 </button>

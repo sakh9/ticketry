@@ -19,6 +19,10 @@
             ($event->end_date == now()->format('Y-m-d') && $event->end_time < now()->format('H:i'));
     @endphp
 
+    @if($event->banner)
+        <img src="{{ asset('storage/' . $event->banner) }}" alt="{{ $event->title }}" class="img-fluid rounded mb-4" style="max-height: 400px; width: 100%; object-fit: cover;">
+    @endif
+    
     {{-- Main Executive Title Section --}}
     <div class="mb-4">
         <h2 class="visitor-main-title mb-1 text-break-word">{{ $event->title }}</h2>

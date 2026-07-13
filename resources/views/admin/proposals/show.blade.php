@@ -48,9 +48,10 @@
             background: var(--surface);
             border-radius: var(--radius);
             border: 1px solid var(--gray-light);
-            padding: 1.5rem;
+            padding: 1.75rem;
             margin-bottom: 1.5rem;
             box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+            width: 100%;
         }
         .panel-title-node {
             font-size: 1rem;
@@ -72,7 +73,7 @@
             font-size: 0.9rem;
         }
         .meta-field-row:last-child { border-bottom: none; }
-        .meta-label-cell { width: 160px; font-weight: 600; color: var(--gray); flex-shrink: 0; }
+        .meta-label-cell { width: 180px; font-weight: 600; color: var(--gray); flex-shrink: 0; }
         .meta-value-cell { color: var(--secondary); flex-grow: 1; }
 
         /* Premium Data Manifest Table Presentation */
@@ -121,9 +122,9 @@
             transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
         }
         .btn-gate-approve:hover {
-            background-color: #059669; /* Mengubah warna hijau menjadi sedikit lebih gelap saat di-hover */
+            background-color: #059669;
             border-color: #059669;
-            color: #ffffff !important; /* Mengunci teks agar tetap putih kontras */
+            color: #ffffff !important;
             opacity: 0.95;
         }
         .btn-gate-approve:disabled {
@@ -166,9 +167,10 @@
 </head>
 <body>
 
-    <div class="container mt-4 mb-5 Lech-wrapper-blueprint animate-fade-in">
+    {{-- UPDATED: Uses container-xl with mx-auto to center the entire layout on screen --}}
+    <div class="container-xl mx-auto px-3 px-md-4 my-4 animate-fade-in">
         
-        {{-- Navigation Return Hub Utility (Retained Layout Specification) --}}
+        {{-- Navigation Return Hub Utility --}}
         <div class="mb-3">
             <a href="{{ route('admin.dashboard') }}" class="btn btn-return-hub py-1.5 px-3 btn-sm d-inline-flex align-items-center gap-1.5 fw-semibold shadow-xs">
                 <i class="bi bi-arrow-left-short fs-5 lh-1"></i>
@@ -189,13 +191,17 @@
         @endif
 
         {{-- Workspace Grid System Split Architecture --}}
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
             
             {{-- Master Content Hub Workspace Side --}}
             <div class="col-lg-8">
                 
                 {{-- Event Identity Core Brief Panel --}}
                 <div class="executive-panel">
+                    <!-- Event Banner -->
+                    @if($event->banner)
+                        <img src="{{ asset('storage/' . $event->banner) }}" alt="{{ $event->title }}" class="img-fluid rounded mb-4" style="max-height: 380px; width: 100%; object-fit: cover;">
+                    @endif
                     <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-3">
                         <h2 class="fw-extrabold tracking-tight text-dark mb-0" style="font-size: 1.75rem;">
                             {{ $event->title }}
@@ -238,6 +244,9 @@
                     {{-- Structured Contact Manifest Data Segment --}}
                     <div class="meta-field-row mt-2">
                         <div class="meta-label-cell">Organizer Node</div>
+                        @if($event->organizer->logo_organizer)
+                            <img src="{{ asset('storage/' . $event->organizer->logo_organizer) }}" alt="Logo" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 5px;">
+                        @endif
                         <div class="meta-value-cell fw-semibold text-dark">{{ $event->organizer->nama_organizer }} <span class="text-muted font-monospace fw-normal fs-xxs">({{ $event->organizer->email_organizer }})</span></div>
                     </div>
                     <div class="meta-field-row">

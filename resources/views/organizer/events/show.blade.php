@@ -13,6 +13,24 @@
         </a>
     </div>
 
+    {{-- Modern Event Banner Frame --}}
+    <div class="event-banner-container position-relative rounded overflow-hidden mb-4 shadow-sm">
+        @if($event->banner)
+            <img src="{{ asset('storage/' . $event->banner) }}" 
+                alt="{{ $event->title }}" 
+                class="event-banner-img w-100 object-fit-cover">
+            <div class="banner-overlay"></div>
+            <span class="badge position-absolute top-0 end-0 m-3 bg-dark bg-opacity-75 text-white backdrop-blur border border-light border-opacity-25 px-3 py-2 rounded-pill fs-xs">
+                <i class="bi bi-image me-1"></i> Cover Image
+            </span>
+        @else
+            <div class="event-banner-placeholder d-flex flex-column align-items-center justify-content-center p-5 text-muted bg-subtle border border-dashed rounded">
+                <i class="bi bi-image-fill fs-1 opacity-25 mb-2"></i>
+                <span class="small fw-semibold">No banner image uploaded for this event</span>
+            </div>
+        @endif
+    </div>
+
     {{-- Main Executive Header Layer --}}
     <div class="mb-4 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
         <div>
@@ -430,6 +448,47 @@
         background: var(--primary);
         color: var(--secondary-dark) !important;
         border-color: var(--primary);
+    }
+
+    /* Banner Container Styling */
+    .event-banner-container {
+        max-height: 420px;
+        min-height: 220px;
+        background-color: var(--bg-subtle);
+        border: 1px solid var(--gray-light);
+    }
+
+    .event-banner-img {
+        max-height: 420px;
+        min-height: 220px;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .event-banner-container:hover .event-banner-img {
+        transform: scale(1.015);
+    }
+
+    /* Subtle Overlay for Image Contrast */
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.2) 100%);
+        pointer-events: none;
+    }
+
+    /* Backdrop Blur Helper for Badges */
+    .backdrop-blur {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Dark Mode Banner Adaptations */
+    [data-bs-theme="dark"] .event-banner-container {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba(15, 23, 42, 0.6);
     }
 
     /* Dynamic Body Elements adaptive fonts mapping */

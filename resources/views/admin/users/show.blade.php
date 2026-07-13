@@ -155,6 +155,21 @@
                         <i class="bi bi-person-badge text-secondary"></i>
                         <span>Identity Profile Vector</span>
                     </div>
+
+                    {{-- Profile Avatar Section --}}
+                    <div class="p-4 text-center border-bottom">
+                        @if(strtolower($user->user_role) === 'organizer' && $user->logo_organizer)
+                            <img src="{{ asset('storage/' . $user->logo_organizer) }}" alt="Logo" style="width: 120px; height: 120px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                        @elseif(strtolower($user->user_role) === 'visitor' && $user->foto_visitor)
+                            <img src="{{ asset('storage/' . $user->foto_visitor) }}" alt="Photo" style="width: 120px; height: 120px; object-fit: cover; border-radius: 50%; margin-bottom: 15px;">
+                        @else
+                            <div style="width: 120px; height: 120px; background: #e9ecef; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 3rem; color: #999; margin-bottom: 15px;">
+                                {{ strtoupper(substr($user->display_name ?? $user->nama_organizer ?? $user->nama_visitor, 0, 1)) }}
+                            </div>
+                        @endif
+                    </div>
+
+                    {{-- Detailed Meta Fields Node --}}
                     <div class="panel-body-node">
                         <div class="meta-field-row">
                             <span class="meta-label-cell">Account Owner Name</span>
@@ -189,7 +204,7 @@
                         <div class="meta-field-row">
                             <span class="meta-label-cell">Timestamp Created</span>
                             <span class="meta-value-cell text-muted small">
-                                <i class="bi bi-clock me-1"></i>{{ $user->created_at->format('d M Y H:i') }}
+                                <i class="bi bi-clock me-1"></i>{{ $user->created_at ? $user->created_at->format('d M Y H:i') : '-' }}
                             </span>
                         </div>
                         <div class="meta-field-row">
@@ -203,7 +218,7 @@
                                         <strong class="d-block font-monospace fs-xxs text-uppercase mb-1"><i class="bi bi-shield-alert me-1"></i>Audit Reason:</strong>
                                         <span class="fw-medium">{{ $user->ban_reason }}</span>
                                         <small class="d-block text-muted mt-2 pt-1 border-top border-danger-subtle font-monospace fs-xxs">
-                                            Logged: {{ $user->banned_at->format('d M Y H:i') }}
+                                            Logged: {{ $user->banned_at ? $user->banned_at->format('d M Y H:i') : '-' }}
                                         </small>
                                     </div>
                                 @else
@@ -232,13 +247,13 @@
                         <div class="col-sm-4">
                             <div class="metric-card metric-card-success border border-start-0 p-3 shadow-xs">
                                 <small class="text-muted d-block text-uppercase font-monospace fs-xxs fw-bold mb-1">Tickets Sold</small>
-                                <h3 class="fw-extrabold text-success mb-0">{{ $user->total_tickets_sold }}</h3>
+                                <h3 class="fw-extrabold text-success mb-0">{{ $user->total_tickets_sold ?? 0 }}</h3>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="metric-card metric-card-info border border-start-0 p-3 shadow-xs">
                                 <small class="text-muted d-block text-uppercase font-monospace fs-xxs fw-bold mb-1">Gross Revenue</small>
-                                <h3 class="fw-extrabold text-info mb-0" style="font-size: 1.45rem; line-height: 1.6;">Rp{{ number_format($user->total_revenue, 0, ',', '.') }}</h3>
+                                <h3 class="fw-extrabold text-info mb-0" style="font-size: 1.45rem; line-height: 1.6;">Rp{{ number_format($user->total_revenue ?? 0, 0, ',', '.') }}</h3>
                             </div>
                         </div>
                     </div>
@@ -280,7 +295,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center gap-1 text-muted small">
                                                         <i class="bi bi-calendar3 fs-xxs"></i>
-                                                        <span class="font-monospace">{{ $event->start_date->format('d M Y') }}</span>
+                                                        <span class="font-monospace">{{ $event->start_date ? $event->start_date->format('d M Y') : '-' }}</span>
                                                     </div>
                                                 </td>
                                                 <td class="text-end font-monospace fw-bold text-dark">
@@ -307,25 +322,25 @@
                         <div class="col-sm-3 col-6">
                             <div class="metric-card metric-card-primary border border-start-0 p-3 shadow-xs">
                                 <small class="text-muted d-block text-uppercase font-monospace fs-xxs fw-bold mb-1">Total Orders</small>
-                                <h4 class="fw-extrabold text-dark mb-0">{{ $user->orders_count }}</h4>
+                                <h4 class="fw-extrabold text-dark mb-0">{{ $user->orders_count ?? 0 }}</h4>
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
                             <div class="metric-card metric-card-success border border-start-0 p-3 shadow-xs">
                                 <small class="text-muted d-block text-uppercase font-monospace fs-xxs fw-bold mb-1">Paid Invoices</small>
-                                <h4 class="fw-extrabold text-success mb-0">{{ $user->paid_orders }}</h4>
+                                <h4 class="fw-extrabold text-success mb-0">{{ $user->paid_orders ?? 0 }}</h4>
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
                             <div class="metric-card metric-card-warning border border-start-0 p-3 shadow-xs">
                                 <small class="text-muted d-block text-uppercase font-monospace fs-xxs fw-bold mb-1">Tickets Count</small>
-                                <h4 class="fw-extrabold text-warning mb-0">{{ $user->total_tickets }}</h4>
+                                <h4 class="fw-extrabold text-warning mb-0">{{ $user->total_tickets ?? 0 }}</h4>
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
                             <div class="metric-card metric-card-info border border-start-0 p-3 shadow-xs">
                                 <small class="text-muted d-block text-uppercase font-monospace fs-xxs fw-bold mb-1">Total Spent</small>
-                                <h4 class="fw-extrabold text-info mb-0 text-truncate" style="font-size: 1.1rem; line-height: 1.85;" title="Rp{{ number_format($user->total_spent, 0, ',', '.') }}">Rp{{ number_format($user->total_spent, 0, ',', '.') }}</h4>
+                                <h4 class="fw-extrabold text-info mb-0 text-truncate" style="font-size: 1.1rem; line-height: 1.85;" title="Rp{{ number_format($user->total_spent ?? 0, 0, ',', '.') }}">Rp{{ number_format($user->total_spent ?? 0, 0, ',', '.') }}</h4>
                             </div>
                         </div>
                     </div>
@@ -337,7 +352,7 @@
                             <span class="fw-bold">Recent Invoices Order Ledger (Max 10 Items)</span>
                         </div>
                         <div class="table-responsive">
-                            @if($user->orders->count() > 0)
+                            @if($user->orders && $user->orders->count() > 0)
                                 <table class="table table-premium mb-0">
                                     <thead>
                                         <tr>
@@ -369,10 +384,10 @@
                                                     @endif
                                                 </td>
                                                 <td class="font-monospace text-dark fw-bold">
-                                                    Rp{{ number_format($order->total_price, 0, ',', '.') }}
+                                                    Rp{{ number_format($order->total_price ?? 0, 0, ',', '.') }}
                                                 </td>
                                                 <td class="text-end text-muted small font-monospace">
-                                                    {{ $order->created_at->format('d M Y') }}
+                                                    {{ $order->created_at ? $order->created_at->format('d M Y') : '-' }}
                                                 </td>
                                             </tr>
                                         @endforeach

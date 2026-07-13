@@ -93,18 +93,10 @@
 
                             {{-- Organizer Description Field --}}
                             <div class="col-12">
-                                <label class="form-label custom-form-label d-flex align-items-center justify-content-between">
-                                    <span>Organizer Description</span>
-                                    <span class="badge bg-subtle text-secondary border border-1 fs-xxs fw-semibold">
-                                        <i class="bi bi-markdown me-1"></i> Markdown Supported
-                                    </span>
-                                </label>
-
-                                <textarea name="deskripsi_organizer" 
-                                        class="form-control premium-input-field" 
-                                        rows="5" 
-                                        placeholder="Tell visitors about your organization...&#10;&#10;Supported formatting:&#10;**bold**, *italic*&#10;## Heading&#10;- Bullet point list">{{ old('deskripsi_organizer', $organizer->deskripsi_organizer) }}</textarea>
-
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="deskripsi_organizer" class="form-control" rows="3">{{ old('deskripsi_organizer', $organizer->deskripsi_organizer) }}</textarea>
+                                </div>
                                 <div class="form-text custom-tiny-hint mt-1.5">
                                     <i class="bi bi-info-circle me-0.5"></i> Provide a clear, detailed bio that will appear on your public organizer profile.
                                 </div>

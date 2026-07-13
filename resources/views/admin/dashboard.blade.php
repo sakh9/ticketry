@@ -129,7 +129,12 @@
                                         <br><small class="text-muted">{{ $event->category->name }}</small>
                                     @endif
                                 </td>
-                                <td>{{ $event->organizer->nama_organizer ?? '-' }}</td>
+                                <td>
+                                    {{ $event->organizer->nama_organizer ?? '-' }}
+                                    @if($event->organizer->logo_organizer)
+                                        <img src="{{ asset('storage/' . $event->organizer->logo_organizer) }}" alt="Logo" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 4px;">
+                                    @endif
+                                </td>
                                 <td>
                                     @if($event->eventLocation)
                                         <span class="text-dark d-block fw-semibold">{{ $event->eventLocation->place }}</span>

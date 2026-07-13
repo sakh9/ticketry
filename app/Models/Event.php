@@ -28,6 +28,7 @@ class Event extends Model
         'other_city',
         'venue_permit',
         'event_plan',
+        'banner',
         'status',
         'rejection_reason',
         'reviewed_by',

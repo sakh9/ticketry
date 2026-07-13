@@ -81,6 +81,7 @@
                         <th scope="col" class="ps-4">Title</th>
                         <th scope="col">Date</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Ticket Remains</th>
                         <th scope="col" class="text-end pe-4">Action</th>
                     </tr>
                 </thead>
@@ -111,6 +112,11 @@
                                     <span class="badge status-badge badge-rejected"><i class="bi bi-x-circle"></i> Rejected</span>
                                 @endif
                             </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span>{{ number_format($event->ticketTypes->sum('quota'), 0, ',', '.') }} </span>
+                                </div>
+                            </td>
                             <td class="text-end pe-4">
                                 <a href="{{ route('organizer.events.show', $event->id_event) }}" class="btn btn-action-view btn-sm d-inline-flex align-items-center gap-1">
                                     <i class="bi bi-eye"></i>
@@ -120,7 +126,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center py-5">
+                            <td colspan="5" class="text-center py-5">
                                 <div class="text-muted mb-2">
                                     <i class="bi bi-calendar-x fs-1"></i>
                                 </div>

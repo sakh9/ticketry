@@ -127,6 +127,7 @@ class EventController extends Controller
             'ticket_quota.*' => 'required|integer|min:30',
             'venue_permit' => 'required_if:location_type,venue|file|mimes:pdf,jpg,jpeg,png|max:2048|nullable',
             'event_plan' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'banner' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ], [
             'ticket_name.*.required' => 'Ticket name is required for all ticket types.',
             'ticket_description.*.required' => 'Ticket description is required for all ticket types.',
@@ -224,6 +225,11 @@ class EventController extends Controller
             $eventPlanPath = $request->file('event_plan')->store('event_plans', 'public');
         }
 
+        $bannerPath = null;
+        if ($request->hasFile('banner')) {
+            $bannerPath = $request->file('banner')->store('banners', 'public');
+        }
+
         $eventData = [
             'id_organizer' => Auth::guard('organizer')->id(),
             'title' => $request->title,
@@ -236,6 +242,7 @@ class EventController extends Controller
             'location_type' => $request->location_type,
             'venue_permit' => $venuePermitPath,
             'event_plan' => $eventPlanPath,
+            'banner' => $bannerPath,
             'status' => 'pending',
             'ticket_access' => false,
         ];

@@ -32,21 +32,14 @@
                     <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
                         <h2 class="portal-main-title mb-0">{{ $organizer->nama_organizer }}</h2>
                         @if($organizer->category)
-                                                    <span class="badge bg-subtle text-secondary border border-1 px-2.5 py-1 fs-xxs fw-semibold">
-                                                        {{ $organizer->category->name }}
-                                                    </span>
-                                                @endif
-                                            </div>
+                            <span class="badge bg-subtle text-secondary border border-1 px-2.5 py-1 fs-xxs fw-semibold">
+                                {{ $organizer->category->name }}
+                            </span>
+                        @endif
+                    </div>
 
-                                            <p class="text-muted small leading-relaxed mb-4">
-                                                @php
-                            $parsedown = new Parsedown();
-                            $descriptionHtml = $parsedown->text($organizer->deskripsi_organizer ?? '');
-                        @endphp
-
-                        <div class="markdown-content">
-                            {!! $descriptionHtml !!}
-                        </div>
+                    <p class="text-muted small leading-relaxed mb-4">
+                        {{ $organizer->deskripsi_organizer }}
                     </p>
 
                     {{-- Metadata & Contact Pills --}}
@@ -63,7 +56,7 @@
                             <div class="meta-chip-item d-flex align-items-center gap-2 small">
                                 <i class="bi bi-envelope-at text-azure-dynamic fs-6"></i>
                                 <span class="text-muted">Email:</span>
-                                <span class="fw-bold font-monospace text-dark-mode-light">{{ $organizer->email_organizer }}</span>
+                                <span class="fw-bold text-dark-mode-light">{{ $organizer->email_organizer }}</span>
                             </div>
                         @endif
                     </div>
@@ -73,7 +66,7 @@
                         @if($organizer->instagram)
                             <a href="https://instagram.com/{{ ltrim($organizer->instagram, '@') }}" target="_blank" rel="noopener noreferrer" class="btn btn-social-pill py-1.5 px-3 small fw-semibold d-inline-flex align-items-center gap-2">
                                 <i class="bi bi-instagram text-danger"></i>
-                                <span>Instagram</span>
+                                <span>{{ $organizer->instagram }}</span>
                             </a>
                         @endif
 
@@ -84,7 +77,6 @@
                             </a>
                         @endif
                     </div>
-
                 </div>
             </div>
         </div>
@@ -294,166 +286,6 @@
     .bg-subtle {
         background-color: var(--bg-subtle);
         color: var(--gray);
-    }
-
-    /* Modern Markdown Content Styling */
-    .markdown-content {
-        color: var(--secondary);
-        line-height: 1.6;
-        font-size: 0.95rem;
-    }
-
-    /* Dark theme overrides for global typography */
-    [data-bs-theme="dark"] .markdown-content {
-        color: #cbd5e1 !important;
-    }
-
-    /* Margin Resets for Clean Layouts */
-    .markdown-content > :first-child { margin-top: 0 !important; }
-    .markdown-content > :last-child { margin-bottom: 0 !important; }
-
-    /* Headings Framework */
-    .markdown-content h1,
-    .markdown-content h2,
-    .markdown-content h3,
-    .markdown-content h4 {
-        color: var(--secondary);
-        font-weight: 700;
-        line-height: 1.3;
-        margin-top: 1.5rem;
-        margin-bottom: 0.6rem;
-    }
-
-    [data-bs-theme="dark"] .markdown-content h1,
-    [data-bs-theme="dark"] .markdown-content h2,
-    [data-bs-theme="dark"] .markdown-content h3,
-    [data-bs-theme="dark"] .markdown-content h4 {
-        color: #f8fafc !important;
-    }
-
-    .markdown-content h1 { font-size: 1.5rem; }
-    .markdown-content h2 { font-size: 1.25rem; border-bottom: 1px solid var(--gray-light); padding-bottom: 0.3rem; }
-    .markdown-content h3 { font-size: 1.1rem; }
-    .markdown-content h4 { font-size: 0.95rem; }
-
-    /* Paragraphs & Text Formatting */
-    .markdown-content p {
-        margin-bottom: 0.9rem;
-    }
-
-    .markdown-content strong {
-        font-weight: 700;
-        color: var(--secondary);
-    }
-
-    [data-bs-theme="dark"] .markdown-content strong {
-        color: #fff !important;
-    }
-
-    .markdown-content em {
-        font-style: italic;
-    }
-
-    .markdown-content a {
-        color: var(--primary, #0d6efd);
-        text-decoration: underline;
-        text-underline-offset: 2px;
-        transition: opacity var(--transition, 0.2s);
-    }
-
-    .markdown-content a:hover {
-        opacity: 0.8;
-    }
-
-    /* Lists Structure */
-    .markdown-content ul,
-    .markdown-content ol {
-        padding-left: 1.4rem;
-        margin-bottom: 0.9rem;
-    }
-
-    .markdown-content li {
-        margin-bottom: 0.35rem;
-    }
-
-    .markdown-content li::marker {
-        color: var(--gray, #6c757d);
-    }
-
-    /* Inline & Block Code Elements */
-    .markdown-content code {
-        font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        background: var(--bg-subtle, #f8f9fa);
-        border: 1px solid var(--gray-light, #e9ecef);
-        color: var(--secondary);
-        padding: 0.15rem 0.4rem;
-        border-radius: var(--radius-sm, 4px);
-        font-size: 0.85em;
-    }
-
-    [data-bs-theme="dark"] .markdown-content code {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
-        color: #f1f5f9;
-    }
-
-    .markdown-content pre {
-        background: var(--bg-subtle, #f8f9fa);
-        border: 1px solid var(--gray-light, #e9ecef);
-        padding: 0.85rem 1rem;
-        border-radius: var(--radius-sm, 6px);
-        overflow-x: auto;
-        margin-bottom: 0.9rem;
-    }
-
-    [data-bs-theme="dark"] .markdown-content pre {
-        background: #0f172a;
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .markdown-content pre code {
-        background: transparent !important;
-        border: none !important;
-        padding: 0 !important;
-        font-size: 0.875rem;
-        color: inherit;
-        white-space: pre;
-    }
-
-    /* Blockquotes & Horizontal Rules */
-    .markdown-content blockquote {
-        border-left: 3px solid var(--gray-light, #dee2e6);
-        padding-left: 0.85rem;
-        margin-left: 0;
-        margin-bottom: 0.9rem;
-        color: var(--gray, #6c757d);
-        font-style: italic;
-    }
-
-    .markdown-content hr {
-        border: 0;
-        border-top: 1px solid var(--gray-light, #dee2e6);
-        margin: 1.25rem 0;
-        opacity: 0.7;
-    }
-
-    /* Data Tables */
-    .markdown-content table {
-        width: 100%;
-        margin-bottom: 0.9rem;
-        border-collapse: collapse;
-        font-size: 0.9rem;
-    }
-
-    .markdown-content th,
-    .markdown-content td {
-        padding: 0.5rem 0.75rem;
-        border: 1px solid var(--gray-light, #dee2e6);
-    }
-
-    .markdown-content th {
-        background: var(--bg-subtle, #f8f9fa);
-        font-weight: 700;
     }
 
     .text-azure-dynamic { color: var(--primary-dark) !important; }

@@ -173,6 +173,11 @@
                     <input type="text" name="title" class="form-control" value="{{ old('title') }}" placeholder="Enter an impactful campaign title" required>
                 </div>
 
+                <div class="mb-4">
+                    <label class="form-label">Event Description <span class="text-danger">*</span></label>
+                    <textarea name="description" class="form-control" rows="4" placeholder="Provide a comprehensive operational blueprint and structural summary of the event..." required>{{ old('description') }}</textarea>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Event Category <span class="text-danger">*</span></label>
@@ -187,9 +192,45 @@
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <label class="form-label">Event Description <span class="text-danger">*</span></label>
-                    <textarea name="description" class="form-control" rows="4" placeholder="Provide a comprehensive operational blueprint and structural summary of the event..." required>{{ old('description') }}</textarea>
+                {{-- Event Banner Section --}}
+                <div class="row g-3 mb-4">
+                    <div class="col-12">
+                        <label class="form-label custom-form-label d-flex align-items-center justify-content-between">
+                            <span>Event Banner</span>
+                            <span class="badge bg-subtle text-secondary border border-1 fs-xxs fw-semibold">
+                                <i class="bi bi-aspect-ratio me-1"></i> 16:9 Aspect Ratio
+                            </span>
+                        </label>
+
+                        {{-- Banner Preview / Upload Container --}}
+                        <div class="banner-preview-wrapper p-3 mb-2 rounded border border-2 border-dashed bg-subtle text-center">
+                            @if(isset($event) && $event->banner)
+                                <div class="banner-preview-box mb-2 overflow-hidden rounded position-relative">
+                                    <img id="banner-preview-img" src="{{ Storage::url($event->banner) }}" alt="Event Banner Preview" class="img-fluid object-fit-cover w-100" style="max-height: 220px;">
+                                </div>
+                            @else
+                                <div id="banner-placeholder" class="py-4 text-muted">
+                                    <i class="bi bi-image fs-1 opacity-50 d-block mb-1"></i>
+                                    <span class="small fw-semibold">Upload an eye-catching event cover image</span>
+                                </div>
+                                <div class="banner-preview-box mb-2 overflow-hidden rounded position-relative d-none">
+                                    <img id="banner-preview-img" src="#" alt="Event Banner Preview" class="img-fluid object-fit-cover w-100" style="max-height: 220px;">
+                                </div>
+                            @endif
+
+                            <input type="file" 
+                                name="banner" 
+                                id="event-banner-input" 
+                                class="form-control form-control-sm premium-input-field mt-2" 
+                                accept="image/jpeg,image/png,image/jpg"
+                                onchange="previewBannerImage(this)">
+                        </div>
+
+                        <div class="form-text custom-tiny-hint d-flex align-items-center gap-1">
+                            <i class="bi bi-info-circle"></i> 
+                            <span>Recommended resolution: <strong>1200x675px</strong> or <strong>800x450px</strong> (JPG, PNG — Max 2MB).</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row g-3">
@@ -569,6 +610,24 @@ function updateTicketNumbers() {
     items.forEach((item, index) => {
         item.querySelector('strong').innerHTML = `<i class="bi bi-ticket-perforated me-1 text-muted"></i> Ticket Type #${index + 1}`;
     });
+}
+
+function previewBannerImage(input) {
+    const previewImg = document.getElementById('banner-preview-img');
+    const placeholder = document.getElementById('banner-placeholder');
+    const previewBox = previewImg?.parentElement;
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            if (previewImg) {
+                previewImg.src = e.target.result;
+                if (previewBox) previewBox.classList.remove('d-none');
+                if (placeholder) placeholder.classList.add('d-none');
+            }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 // ============================================================================
