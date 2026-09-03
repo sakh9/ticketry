@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class AssignSpatieRoles extends Command
 {
-    protected $signature = 'cikieto:assign-roles';
+    protected $signature = 'ticketry:assign-roles';
     protected $description = 'Assign Spatie roles to all users';
 
     public function handle(): void

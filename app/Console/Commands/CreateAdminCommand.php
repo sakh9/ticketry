@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class CreateAdminCommand extends Command
 {
-    protected $signature = 'cikieto:create-admin 
+    protected $signature = 'ticketry:create-admin 
                             {id_admin : Admin ID}
                             {nama_admin : Admin name}
                             {email : Admin email}
