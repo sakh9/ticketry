@@ -1,5 +1,3 @@
-**File:** `README.md`
-```markdown
 # ticketry.
 
 A Laravel-based event ticketing platform connecting organizers and visitors.
